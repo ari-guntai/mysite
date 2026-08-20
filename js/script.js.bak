@@ -1,0 +1,31 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const button = document.getElementById("messageBtn");
+    const modal = document.getElementById("recommendModal");
+
+    if (button && modal) {
+        button.addEventListener("click", function () {
+            // モーダルダイアログを開く
+            if (typeof modal.showModal === "function") {
+                modal.showModal();
+            } else {
+                alert("おすすめ旅行プラン：月面ステーション & 軌道周回 3泊4日ツアー");
+            }
+        });
+    }
+
+    // バックドロップ（モーダル外側）クリックで閉じる処理
+    if (modal) {
+        modal.addEventListener('click', (event) => {
+            const rect = modal.getBoundingClientRect();
+            const isInModal = (
+                rect.top <= event.clientY &&
+                event.clientY <= rect.bottom &&
+                rect.left <= event.clientX &&
+                event.clientX <= rect.right
+            );
+            if (!isInModal) {
+                modal.close();
+            }
+        });
+    }
+});
